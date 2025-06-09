@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk
+      ANDROID_SDK_ROOT: ${{ env.RUNNER_TEMP }}/android-sdk
 
     steps:
       - name: Checkout code
@@ -46,20 +46,6 @@ jobs:
         run: |
           echo "no" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
 
-      - name: Start Emulator
-        run: |
-          $ANDROID_SDK_ROOT/emulator/emulator -avd test_emulator -no-window -no-audio -no-snapshot &
-
-      - name: Wait for emulator boot
-        run: |
-          adb wait-for-device
-          boot_completed=""
-          while [[ "$boot_completed" != "1" ]]; do
-            boot_completed=$(adb shell getprop sys.boot_completed 2>&1 | tr -d '\r')
-            echo "Boot completed: $boot_completed"
-            sleep 5
-          done
-
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
         with:
@@ -67,21 +53,6 @@ jobs:
 
       - name: Install Appium CLI
         run: npm install -g appium
-
-      - name: Start Appium Server
-        run: nohup appium &
-
-      - name: Wait for Appium to start
-        run: |
-          n=0
-          until curl -s http://localhost:4723/status | grep '"ready":true'; do
-            n=$((n+1))
-            if [ $n -gt 30 ]; then
-              echo "Appium server failed to start"
-              exit 1
-            fi
-            sleep 2
-          done
 
       - name: Run tests
         run: mvn clean test
