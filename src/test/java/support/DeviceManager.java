@@ -47,6 +47,7 @@ public class DeviceManager {
                     "-n", AVD_NAME,
                     "-k", SYSTEM_IMAGE,
                     "--device", DEVICE_PROFILE,
+                    "--abi", "x86_64",
                     "--force"
             };
             ProcessBuilder createAvdBuilder = new ProcessBuilder(createAvdCmd);
