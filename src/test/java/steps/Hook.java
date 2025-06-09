@@ -14,14 +14,14 @@ public class Hook {
 
     @BeforeAll
     public static void globalSetUp() throws IOException, InterruptedException {
-        DeviceManager.startEmulator();
+        //DeviceManager.startEmulator();
         AppiumServerManager.startAppiumServer();
     }
 
     @AfterAll
     public static void globalTearDown() throws IOException, InterruptedException {
         AppiumServerManager.stopAppiumServer();
-        DeviceManager.stopEmulator();
+        //DeviceManager.stopEmulator();
     }
 
     @Before
