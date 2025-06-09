@@ -55,9 +55,6 @@ jobs:
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
           sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
 
-      - name: Install which tool
-        run: sudo apt-get update && sudo apt-get install -y which
-
       - name: Verify avdmanager is available
         run: |
           ls -l $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/
