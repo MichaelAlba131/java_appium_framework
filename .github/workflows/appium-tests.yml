@@ -56,7 +56,7 @@ jobs:
       - name: Create AVD
         run: |
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
-          echo "no" | avdmanager --sdk_root=$ANDROID_SDK_ROOT create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
+          echo "no" | avdmanager create avd --sdk_root=$ANDROID_SDK_ROOT -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
 
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
