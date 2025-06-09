@@ -46,7 +46,7 @@ jobs:
             "platform-tools" \
             "platforms;android-33" \
             "emulator" \
-            "system-images;android-33;google_apis;x86_64"
+            "system-images;android-33;google_apis_playstore;arm64-v8a"
 
       - name: Check avdmanager functionality
         run: |
@@ -56,7 +56,7 @@ jobs:
       - name: Install system image (optional, if not done before)
         run: |
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
-          sdkmanager --sdk_root=$ANDROID_SDK_ROOT "system-images;android-33;google_apis;x86_64"
+          sdkmanager --sdk_root=$ANDROID_SDK_ROOT "system-images;android-33;google_apis_playstore;arm64-v8a"
 
       - name: Set ANDROID_HOME and update PATH
         run: |
@@ -67,12 +67,12 @@ jobs:
         run: |
           echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd \
             -n ciEmulator \
-            -k "system-images;android-33;google_apis;x86_64" \
+            -k "system-images;android-33;google_apis_playstore;arm64-v8a" \
             --device "pixel" \
             --force
 
       - name: Create Android Virtual Device
-        run: echo "no" | avdmanager create avd -n ciEmulator -k "system-images;android-33;google_apis;x86_64" --force
+        run: echo "no" | avdmanager create avd -n ciEmulator -k "system-images;android-33;google_apis_playstore;arm64-v8a" --force
 
       - name: Fix HOME for AVD creation
         run: echo "HOME=$HOME" >> $GITHUB_ENV
