@@ -72,12 +72,13 @@ jobs:
             --force
 
       - name: Create Android Virtual Device
-        run: echo "no" | avdmanager create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
+        run: echo "no" | avdmanager create avd -n ciEmulator -k "system-images;android-33;google_apis;x86_64" --force
 
 
       - name: Start Android emulator
         run: |
-          $ANDROID_SDK_ROOT/emulator/emulator -avd test_emulator -no-window -no-audio -no-snapshot &
+          export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$PATH
+          $ANDROID_SDK_ROOT/emulator/emulator -avd ciEmulator -no-window -no-audio -no-snapshot &
           adb wait-for-device
           boot_completed=""
           until [[ "$boot_completed" == "1" ]]; do
@@ -85,8 +86,6 @@ jobs:
             echo "Boot completed: $boot_completed"
             sleep 5
           done
-        env:
-          PATH: $ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$PATH
 
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
