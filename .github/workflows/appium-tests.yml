@@ -84,7 +84,7 @@ jobs:
 
       - name: Start emulator
         run: |
-          AVD_NAME=ciEmulator
+          export AVD_NAME=ciEmulator
           $ANDROID_SDK_ROOT/emulator/emulator -avd $AVD_NAME -no-window -no-audio -no-snapshot &
           $ANDROID_SDK_ROOT/platform-tools/adb wait-for-device
           boot_completed=""
