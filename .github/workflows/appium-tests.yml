@@ -37,9 +37,6 @@ jobs:
           mv cmdline-tools-temp/cmdline-tools/* cmdline-tools/latest/
           rm -rf cmdline-tools-temp
 
-      - name: Accept Android SDK licenses
-        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
-
       - name: Install Android SDK Commandline Tools
         run: |
           sudo apt-get update
@@ -48,9 +45,15 @@ jobs:
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip
           unzip commandlinetools.zip -d $ANDROID_SDK_ROOT/cmdline-tools/latest
 
-      - name: Create AVD
+      - name: Accept Android SDK licenses
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
+
+      - name: Install required SDK packages
         run: |
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
+
+      - name: Create AVD
+        run: echo "no" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager --sdk_root=$ANDROID_SDK_ROOT create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
 
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
