@@ -20,6 +20,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Set JAVA_HOME env variable
+        run: echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
+
       - name: Install Android SDK
         env:
           ANDROID_SDK_ROOT: $RUNNER_TEMP/android-sdk
@@ -46,10 +49,8 @@ jobs:
           unzip commandlinetools.zip -d $ANDROID_SDK_ROOT/cmdline-tools/latest
 
       - name: Create AVD
-        env:
-          ANDROID_SDK_ROOT: $RUNNER_TEMP/android-sdk
         run: |
-          echo "no" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force
 
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
@@ -61,3 +62,12 @@ jobs:
 
       - name: Run tests
         run: mvn clean test
+    needs:
+    with:
+    permissions:
+    name:
+    uses:
+    strategy:
+    if:
+    secrets:
+    concurrency:
