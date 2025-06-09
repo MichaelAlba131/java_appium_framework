@@ -36,8 +36,10 @@ jobs:
 
       - name: Accept Android SDK licenses
         env:
-          ANDROID_SDK_ROOT: $RUNNER_TEMP/android-sdk
-        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+          JAVA_HOME: ${{ env.JAVA_HOME }}
+          ANDROID_SDK_ROOT: ${{ env.ANDROID_SDK_ROOT }}
+        run: |
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
 
       - name: Install emulator and system image
         env:
