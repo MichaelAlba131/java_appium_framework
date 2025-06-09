@@ -51,7 +51,6 @@ jobs:
       - name: Install SDK packages
         run: |
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
-          sdkmanager --sdk_root=$ANDROID_SDK_ROOT --clear-cache
           sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
 
       - name: Create AVD
