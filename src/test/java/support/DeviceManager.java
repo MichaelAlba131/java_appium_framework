@@ -84,8 +84,8 @@ public class DeviceManager {
             throw new FileNotFoundException("emulator not found at: " + emulatorPath);
         }
         ProcessBuilder builder = new ProcessBuilder(
-                emulatorPath, "-avd", AVD_NAME, "-no-window", "-no-audio"
-                //        emulatorPath, "-avd", AVD_NAME, "-no-audio"
+                //emulatorPath, "-avd", AVD_NAME, "-no-window", "-no-audio"
+                        emulatorPath, "-avd", AVD_NAME, "-no-audio"
         );
         builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
         builder.redirectError(ProcessBuilder.Redirect.INHERIT); // também capture erros do emulador
