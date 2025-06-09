@@ -69,7 +69,7 @@ jobs:
 
       - name: Create AVD
         run: |
-          echo "no" | $RUNNER_TEMP/android-sdk/cmdline-tools/latest/bin/avdmanager create avd \
+          echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd \
             -n ciEmulator \
             -k "system-images;android-33;google_apis;x86_64" \
             --device "pixel" \
