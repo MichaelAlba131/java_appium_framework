@@ -82,13 +82,13 @@ jobs:
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
           avdmanager list avd
 
-      - name: Start Android emulator
+      - name: Start emulator
         run: |
-          $ANDROID_SDK_ROOT/emulator/emulator -avd ciEmulator -no-window -no-audio -no-snapshot &
-          adb wait-for-device
+          $ANDROID_SDK_ROOT/emulator/emulator -avd $AVD_NAME -no-window -no-audio -no-snapshot &
+          $ANDROID_SDK_ROOT/platform-tools/adb wait-for-device
           boot_completed=""
           until [[ "$boot_completed" == "1" ]]; do
-            boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
+            boot_completed=$($ANDROID_SDK_ROOT/platform-tools/adb shell getprop sys.boot_completed | tr -d '\r')
             echo "Boot completed: $boot_completed"
             sleep 5
           done
