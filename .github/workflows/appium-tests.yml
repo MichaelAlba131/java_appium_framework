@@ -85,7 +85,8 @@ jobs:
       - name: Start Android Emulator
         env:
           AVD_NAME: ciEmulator
-          HOME: /home/runner  # Garante que o emulador busque no diretório certo
+          HOME: /home/runner
+          ANDROID_AVD_HOME: /home/runner/.config/.android/avd
         run: |
           export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$PATH
 
