@@ -82,11 +82,22 @@ jobs:
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
           avdmanager list avd
 
-      - name: Start emulator
+      - name: Start Android Emulator
+        env:
+          AVD_NAME: ciEmulator
+          HOME: /home/runner  # Garante que o emulador busque no diretório certo
         run: |
-          export AVD_NAME=ciEmulator
-          $ANDROID_SDK_ROOT/emulator/emulator -avd $AVD_NAME -no-window -no-audio -no-snapshot &
+          export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$PATH
+
+          echo "Listing available AVDs:"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager list avd
+
+          echo "Starting emulator: $AVD_NAME"
+          nohup $ANDROID_SDK_ROOT/emulator/emulator -avd $AVD_NAME -no-window -no-audio -no-snapshot &
+
+          echo "Waiting for device to be ready..."
           $ANDROID_SDK_ROOT/platform-tools/adb wait-for-device
+
           boot_completed=""
           until [[ "$boot_completed" == "1" ]]; do
             boot_completed=$($ANDROID_SDK_ROOT/platform-tools/adb shell getprop sys.boot_completed | tr -d '\r')
