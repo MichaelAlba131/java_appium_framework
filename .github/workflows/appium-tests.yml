@@ -63,14 +63,6 @@ jobs:
           echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
           echo "PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH" >> $GITHUB_ENV
 
-      - name: Create AVD
-        run: |
-          echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd \
-            -n ciEmulator \
-            -k "system-images;android-33;google_apis;x86_64" \
-            --device "pixel" \
-            --force
-
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
         with:
