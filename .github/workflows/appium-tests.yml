@@ -62,12 +62,3 @@ jobs:
 
       - name: Run tests
         run: mvn clean test
-    needs:
-    with:
-    permissions:
-    name:
-    uses:
-    strategy:
-    if:
-    secrets:
-    concurrency:
