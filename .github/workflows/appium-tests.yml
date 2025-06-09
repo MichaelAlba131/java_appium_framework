@@ -74,15 +74,21 @@ jobs:
       - name: Create Android Virtual Device
         run: echo "no" | avdmanager create avd -n ciEmulator -k "system-images;android-33;google_apis;x86_64" --force
 
+      - name: Fix HOME for AVD creation
+        run: echo "HOME=$HOME" >> $GITHUB_ENV
+
+      - name: List available AVDs
+        run: |
+          export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+          avdmanager list avd
 
       - name: Start Android emulator
         run: |
-          export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$PATH
           $ANDROID_SDK_ROOT/emulator/emulator -avd ciEmulator -no-window -no-audio -no-snapshot &
           adb wait-for-device
           boot_completed=""
           until [[ "$boot_completed" == "1" ]]; do
-            boot_completed=$(adb shell getprop sys.boot_completed 2>&1 | tr -d '\r')
+            boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
             echo "Boot completed: $boot_completed"
             sleep 5
           done
