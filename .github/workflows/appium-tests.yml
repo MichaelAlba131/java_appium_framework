@@ -29,9 +29,10 @@ jobs:
           mkdir -p $ANDROID_SDK_ROOT
           cd $ANDROID_SDK_ROOT
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
-          unzip cmdline-tools.zip
+          unzip cmdline-tools.zip -d cmdline-tools-temp
           mkdir -p cmdline-tools/latest
-          mv cmdline-tools/* cmdline-tools/latest/
+          mv cmdline-tools-temp/cmdline-tools/* cmdline-tools/latest/
+          rm -rf cmdline-tools-temp
 
       - name: Accept Android SDK licenses
         env:
