@@ -48,10 +48,10 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
 
-      - name: Install required SDK packages
-        run: sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
-        env:
-          PATH: $ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+      - name: Install SDK packages
+        run: |
+          export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+          sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
 
       - name: Verify avdmanager
         run: |
