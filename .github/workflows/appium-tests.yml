@@ -53,10 +53,10 @@ jobs:
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
           sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
 
-      - name: Check avdmanager version
+      - name: Check avdmanager functionality
         run: |
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
-          avdmanager --version
+          avdmanager list device
 
       - name: Install Node.js & Appium
         uses: actions/setup-node@v3
