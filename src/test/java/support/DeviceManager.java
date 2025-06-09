@@ -9,7 +9,7 @@ public class DeviceManager {
     // ATUALIZE a system image para a disponível conforme o log:
     // Antes:
     // private static final String SYSTEM_IMAGE = "system-images;android-31;google_apis;x86_64";
-    private static final String SYSTEM_IMAGE = "system-images;android-36;google_apis_playstore;arm64-v8a";
+    private static final String SYSTEM_IMAGE = "system-images;android-33;google_apis;x86_64";
     private static final String DEVICE_PROFILE = "pixel";
     private static Process emulatorProcess;
     private static String androidHome = null;
