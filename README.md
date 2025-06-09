@@ -1,38 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-  pre {
-    background: #272822;
-    color: #f8f8f2;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-  }
-  code {
-    font-family: Consolas, monospace;
-  }
-  section {
-    margin-bottom: 40px;
-  }
-  ul {
-    margin-left: 20px;
-  }
-  .emoji {
-    font-size: 1.3em;
-    margin-right: 8px;
-  }
-  a {
-    color: #2980b9;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-</style>
-</head>
 <body>
 
 <h1>📱 Projeto de Testes Automatizados Mobile com Appium + Java</h1>
