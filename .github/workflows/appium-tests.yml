@@ -37,12 +37,15 @@ jobs:
           mv cmdline-tools-temp/cmdline-tools/* cmdline-tools/latest/
           rm -rf cmdline-tools-temp
 
-      - name: Setup Android SDK cmdline-tools
+      - name: Install Android SDK cmdline-tools
         run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip wget
           mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+          cd $ANDROID_SDK_ROOT/cmdline-tools
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
-          unzip -q cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
-          mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+          unzip -q cmdline-tools.zip
+          mv cmdline-tools latest
           rm cmdline-tools.zip
 
       - name: Accept Android SDK licenses
