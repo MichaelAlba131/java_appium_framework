@@ -55,7 +55,7 @@ jobs:
 
       - name: Verify avdmanager
         run: |
-          which avdmanager
+          command -v avdmanager
           avdmanager --version
         env:
           PATH: $ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
